@@ -1,0 +1,14 @@
+modname = gw3x-gpio-led
+ifdef KERNELRELEASE
+obj-m := $(modname).o
+else
+CC = @CC@
+CFLAGS = @CFLAGS@
+LDFLAGS = @LDFLAGS@
+kdir := @kdir@
+srcdir := @srcdir@
+@SET_MAKE@
+.PHONY: all
+all:
+	$(MAKE) -C $(kdir) SUBDIRS=$(realpath $(srcdir)) modules
+endif
